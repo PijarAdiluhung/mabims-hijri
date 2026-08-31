@@ -25,6 +25,29 @@ async function ensureInit(): Promise<void> {
   }
 }
 
+/**
+ * Get today's Hijri date based on timezone.
+ *
+ * Works offline using bundled MABIMS data (2024–2026).
+ * Falls back to API for dates outside bundled range.
+ *
+ * @param options - Configuration options
+ * @param options.tz - IANA timezone (default: 'Asia/Jakarta')
+ * @param options.forceRefresh - Bypass cache and fetch from API (default: false)
+ * @returns Today's Hijri date with metadata
+ *
+ * @example
+ * ```typescript
+ * import { today } from 'mabims-hijri';
+ *
+ * const date = await today();
+ * console.log(date.output);
+ * // { date: '1448-03-18', calendar: 'hijri', month_name: 'Rabiul Awal', ... }
+ *
+ * // Custom timezone
+ * const kl = await today({ tz: 'Asia/Kuala_Lumpur' });
+ * ```
+ */
 export async function today(
   options: { tz?: string; forceRefresh?: boolean } = {}
 ): Promise<TodayResponse> {

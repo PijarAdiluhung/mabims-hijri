@@ -9,6 +9,32 @@ function getCacheKey(date: string, calendar: string): string {
   return `convert_${date}_${calendar}`;
 }
 
+/**
+ * Convert a date between Gregorian and Hijri calendars.
+ *
+ * Uses bundled MABIMS data when available, falls back to API.
+ *
+ * @param date - ISO date string (YYYY-MM-DD)
+ * @param calendar - Input calendar type ('gregorian' or 'hijri')
+ * @param options - Configuration options
+ * @param options.forceRefresh - Bypass cache (default: false)
+ * @returns Converted date with metadata
+ *
+ * @example
+ * ```typescript
+ * import { convert } from 'mabims-hijri';
+ *
+ * // Gregorian → Hijri
+ * const hijri = await convert('2026-08-31');
+ * console.log(hijri.output);
+ * // { date: '1448-03-18', calendar: 'hijri', month_name: 'Rabiul Awal', ... }
+ *
+ * // Hijri → Gregorian
+ * const greg = await convert('1448-03-18', 'hijri');
+ * console.log(greg.output);
+ * // { date: '2026-08-31', calendar: 'gregorian' }
+ * ```
+ */
 export async function convert(
   date: string,
   calendar: 'gregorian' | 'hijri' = 'gregorian',

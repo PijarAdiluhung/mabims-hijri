@@ -24,6 +24,11 @@ function getStorage(): StorageAdapter {
   return storage;
 }
 
+/**
+ * Get the stored table from local storage.
+ *
+ * @returns Stored table or null if not available
+ */
 export function getStoredTable(): StoredTable | null {
   if (currentTable) return currentTable;
   
@@ -39,6 +44,11 @@ export function getStoredTable(): StoredTable | null {
   }
 }
 
+/**
+ * Get the current calendar table (stored or bundled).
+ *
+ * @returns Calendar data with both Gregorian-Hijri mappings
+ */
 export function getTable(): { gregorian_to_hijri: Record<string, string>; hijri_to_gregorian: Record<string, string> } {
   const stored = getStoredTable();
   
@@ -52,6 +62,12 @@ export function getTable(): { gregorian_to_hijri: Record<string, string>; hijri_
   return bundledData;
 }
 
+/**
+ * Check if a newer table version is available from the API.
+ *
+ * @param force - Force check even if recently checked
+ * @returns True if update is available
+ */
 export async function checkForUpdate(force: boolean = false): Promise<boolean> {
   const now = Date.now();
   
@@ -76,6 +92,11 @@ export async function checkForUpdate(force: boolean = false): Promise<boolean> {
   }
 }
 
+/**
+ * Fetch and store the latest table from the API.
+ *
+ * @returns True if update was successful
+ */
 export async function updateTable(): Promise<boolean> {
   try {
     const tableData = await fetchTable();
@@ -98,6 +119,11 @@ export async function updateTable(): Promise<boolean> {
   }
 }
 
+/**
+ * Initialize the table system.
+ *
+ * Checks for updates and fetches new data if available.
+ */
 export async function init(): Promise<void> {
   const needsUpdate = await checkForUpdate();
   if (needsUpdate) {

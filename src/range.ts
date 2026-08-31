@@ -52,6 +52,32 @@ function getHijriDaysInRange(start: string, end: string): string[] {
   return days;
 }
 
+/**
+ * Convert a date range between Gregorian and Hijri calendars.
+ *
+ * Maximum 45 days per request. Uses bundled data when available.
+ *
+ * @param start - Start date (YYYY-MM-DD)
+ * @param end - End date (YYYY-MM-DD)
+ * @param calendar - Input calendar type ('gregorian' or 'hijri')
+ * @param options - Configuration options
+ * @param options.forceRefresh - Bypass cache (default: false)
+ * @returns Array of converted dates
+ *
+ * @example
+ * ```typescript
+ * import { range } from 'mabims-hijri';
+ *
+ * const result = await range('2026-08-31', '2026-09-05');
+ * console.log(result.count);  // 6
+ * console.log(result.items);
+ * // [
+ * //   { input: '2026-08-31', output: '1448-03-18', ... },
+ * //   { input: '2026-09-01', output: '1448-03-19', ... },
+ * //   ...
+ * // ]
+ * ```
+ */
 export async function range(
   start: string,
   end: string,

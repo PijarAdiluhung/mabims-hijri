@@ -8,6 +8,26 @@ function getCacheKey(year: number, calendar: string): string {
   return `year_${year}_${calendar}`;
 }
 
+/**
+ * Get all days in a year with Hijri conversion.
+ *
+ * Returns 12 months of calendar data. Useful for building year-long calendar views.
+ *
+ * @param year - Gregorian year
+ * @param calendar - Input calendar type ('gregorian' or 'hijri')
+ * @param options - Configuration options
+ * @param options.forceRefresh - Bypass cache (default: false)
+ * @returns Year data with all 12 months
+ *
+ * @example
+ * ```typescript
+ * import { year } from 'mabims-hijri';
+ *
+ * const data = await year(2026);
+ * console.log(data.count);  // 365
+ * console.log(Object.keys(data.months));  // ['1', '2', ..., '12']
+ * ```
+ */
 export async function year(
   year: number,
   calendar: 'gregorian' | 'hijri' = 'gregorian',

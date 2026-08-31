@@ -288,6 +288,34 @@ import type { HijriDate, TodayResponse, ConvertResponse } from 'mabims-hijri';
 
 The bundled data covers **Hijri 1445–1448** (Gregorian 2024–2026). Dates outside this range fall back to the live API when online.
 
+## CLI
+
+Force-sync bundled data from the API:
+
+```bash
+# Sync table data
+npx mabims-sync
+
+# Check for updates only
+npx mabims-sync --check
+```
+
+## Cache TTL
+
+Configure how long cached data stays valid:
+
+```typescript
+import { setCacheTTL } from 'mabims-hijri';
+
+// Set cache to 1 hour
+setCacheTTL(60 * 60 * 1000);
+
+// Set cache to 7 days
+setCacheTTL(7 * 24 * 60 * 60 * 1000);
+```
+
+Default: 24 hours.
+
 ## Contributing
 
 1. Clone the repo

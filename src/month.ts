@@ -12,6 +12,28 @@ function getCacheKey(year: number, month: number, calendar: string): string {
   return `month_${year}_${month}_${calendar}`;
 }
 
+/**
+ * Get all days in a month with Hijri conversion.
+ *
+ * Returns a calendar grid suitable for building UIs.
+ *
+ * @param year - Gregorian year
+ * @param month - Gregorian month (1-12)
+ * @param calendar - Input calendar type ('gregorian' or 'hijri')
+ * @param options - Configuration options
+ * @param options.forceRefresh - Bypass cache (default: false)
+ * @returns Month data with all days converted
+ *
+ * @example
+ * ```typescript
+ * import { month } from 'mabims-hijri';
+ *
+ * const august = await month(2026, 8);
+ * console.log(august.count);  // 31
+ * console.log(august.items[0]);
+ * // { gregorian: '2026-08-01', hijri: '1448-02-18', source: 'mabims' }
+ * ```
+ */
 export async function month(
   year: number,
   month: number,

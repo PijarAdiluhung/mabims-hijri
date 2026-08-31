@@ -8,4 +8,5 @@ export { compare } from './compare';
 export { fetchToday, fetchConvert, fetchMeta, fetchRange, fetchTable, fetchMonth, fetchYear, fetchEvents } from './api';
 export { getBundledDate, getBundledHijriDate, isBundledDateAvailable, getBundledRange, getBundledHijriRange } from './bundled';
 export { init, checkForUpdate, updateTable, getTable, getStoredTable } from './table';
+export { setCacheTTL, getCacheTTL } from './cache';
 export * from './types';
