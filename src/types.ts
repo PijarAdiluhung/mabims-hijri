@@ -10,6 +10,10 @@ export interface HijriDate {
 export interface GregorianDate {
   date: string;
   calendar: 'gregorian';
+  day?: number;
+  month?: number;
+  month_name?: string;
+  year?: number;
 }
 
 export interface TodayResponse {
@@ -45,4 +49,25 @@ export interface MetaResponse {
     gregorian_start: string;
     gregorian_end: string;
   };
+}
+
+export interface DateItem {
+  input: string;
+  output: string;
+  calendar: string;
+  day: number;
+  month: number;
+  month_name: string;
+  year: number;
+}
+
+export interface RangeResponse {
+  input: {
+    start: string;
+    end: string;
+    calendar: string;
+  };
+  count: number;
+  items: DateItem[];
+  warnings: string[];
 }

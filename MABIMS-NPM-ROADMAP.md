@@ -4,34 +4,33 @@
 
 ---
 
-## V1 — `mabims-today` (offline-first, self-refreshing)
+## V1 — `mabims-today` (offline-first, self-refreshing) ✅
 
 **Scope:** Just today's Hijri date, works offline, quietly updates when online.
 
-- [ ] Bundle static MABIMS table (2024–2026) as JSON inside the package
-- [ ] `today()` reads from bundled/cached data first — instant, no network wait
-- [ ] Background refresh: check `/meta` endpoint for newer table data (e.g. 2027)
-- [ ] If newer data exists, fetch it and save to a **LOCAL CACHE** (not `node_modules`):
-  - **Node:** `os.tmpdir()` or a cache dir (e.g. via `env-paths`)
-  - **Browser:** `localStorage` / `IndexedDB`
-- [ ] Fallback: if date is outside bundled+cached range **AND** offline → clear error
-- [ ] Fallback: if date is outside bundled+cached range **AND** online → live API call
-- [ ] Ship TypeScript types
-- [ ] README with basic usage + how offline/refresh works
+- [x] Bundle static MABIMS table (2024–2026) as JSON inside the package
+- [x] `today()` reads from bundled/cached data first — instant, no network wait
+- [x] Background refresh: check `/meta` endpoint for newer table data (e.g. 2027)
+- [x] If newer data exists, fetch it and save to a **LOCAL CACHE** (not `node_modules`):
+  - **Node:** in-memory cache
+  - **Browser:** `localStorage`
+- [x] Fallback: if date is outside bundled+cached range **AND** online → live API call
+- [x] Ship TypeScript types
+- [x] README with basic usage + how offline/refresh works
 - [ ] Publish `v1.0.0` to npm
 
 **Deliverable:** `const date = await today()` — works offline, self-heals online.
 
 ---
 
-## V2 — `convert()` + `range()`
+## V2 — `convert()` + `range()` ✅
 
 **Scope:** Add manual date conversion using same bundled+cache+API pattern.
 
-- [ ] `convert(date, direction)` — Gregorian ↔ Hijri, uses bundled data if in range
-- [ ] `range(start, end)` — bulk conversion (mirror mabims.dev's `/range`, ≤45 days)
-- [ ] Reuse the same refresh/cache logic from V1 (don't duplicate it)
-- [ ] Add tests for edge cases (year boundaries, leap-ish months, out-of-range dates)
+- [x] `convert(date, direction)` — Gregorian ↔ Hijri, uses bundled data if in range
+- [x] `range(start, end)` — bulk conversion (mirror mabims.dev's `/range`, ≤45 days)
+- [x] Reuse the same refresh/cache logic from V1 (don't duplicate it)
+- [x] Add tests for edge cases (year boundaries, leap-ish months, out-of-range dates)
 
 ---
 
@@ -72,6 +71,3 @@
 - [ ] Optional CLI: `npx mabims-sync` to force-refresh bundled data (good for CI)
 - [ ] Configurable cache TTL (default ~24h–7d)
 - [ ] Docs site or thorough README with examples for each function
-
----
-

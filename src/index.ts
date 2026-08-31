@@ -1,4 +1,6 @@
 export { today } from './today';
-export { fetchToday, fetchConvert, fetchMeta } from './api';
-export { getBundledDate, isBundledDateAvailable, getBundledRange } from './bundled';
+export { convert } from './convert';
+export { range } from './range';
+export { fetchToday, fetchConvert, fetchMeta, fetchRange } from './api';
+export { getBundledDate, getBundledHijriDate, isBundledDateAvailable, getBundledRange, getBundledHijriRange } from './bundled';
 export * from './types';

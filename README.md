@@ -112,6 +112,79 @@ interface HijriDate {
 }
 ```
 
+### `convert(date, calendar?)`
+
+Convert a date between Gregorian and Hijri. Uses bundled data when available.
+
+```typescript
+import { convert } from 'mabims';
+
+// Gregorian → Hijri (default)
+const hijri = await convert('2026-08-31');
+console.log(hijri.output);
+// { date: '1448-03-18', calendar: 'hijri', month_name: 'Rabiul Awal', ... }
+
+// Hijri → Gregorian
+const gregorian = await convert('1448-03-18', 'hijri');
+console.log(gregorian.output);
+// { date: '2026-08-31', calendar: 'gregorian' }
+```
+
+**Parameters:**
+
+| Param | Type | Default | Description |
+|-------|------|---------|-------------|
+| `date` | `string` | required | ISO date string (`YYYY-MM-DD`) |
+| `calendar` | `'gregorian' \| 'hijri'` | `'gregorian'` | Input calendar type |
+| `options.forceRefresh` | `boolean` | `false` | Bypass cache |
+
+### `range(start, end, calendar?)`
+
+Bulk conversion for a date range (max 45 days).
+
+```typescript
+import { range } from 'mabims';
+
+const result = await range('2026-08-31', '2026-09-05');
+console.log(result.count);  // 6
+console.log(result.items);
+// [
+//   { input: '2026-08-31', output: '1448-03-18', ... },
+//   { input: '2026-09-01', output: '1448-03-19', ... },
+//   ...
+// ]
+```
+
+**Parameters:**
+
+| Param | Type | Default | Description |
+|-------|------|---------|-------------|
+| `start` | `string` | required | Start date (`YYYY-MM-DD`) |
+| `end` | `string` | required | End date (`YYYY-MM-DD`) |
+| `calendar` | `'gregorian' \| 'hijri'` | `'gregorian'` | Input calendar type |
+| `options.forceRefresh` | `boolean` | `false` | Bypass cache |
+
+**Returns:** `RangeResponse`
+
+```typescript
+interface RangeResponse {
+  input: { start: string; end: string; calendar: string };
+  count: number;
+  items: DateItem[];
+  warnings: string[];
+}
+
+interface DateItem {
+  input: string;      // '2026-08-31'
+  output: string;     // '1448-03-18'
+  calendar: string;   // 'hijri'
+  day: number;
+  month: number;
+  month_name: string;
+  year: number;
+}
+```
+
 ### `getBundledDate(gregorianDate)`
 
 Look up a Gregorian date in the bundled MABIMS table. Returns `null` if outside range.

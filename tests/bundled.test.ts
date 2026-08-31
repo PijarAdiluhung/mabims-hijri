@@ -48,7 +48,7 @@ describe('bundled', () => {
 
   describe('isBundledDateAvailable', () => {
     it('should return true for date in range', () => {
-      expect(isBundledDateAvailable('2026-08-31')).toBe(true);
+      expect(isBundledDateAvailable('2026-08-31', 'gregorian')).toBe(true);
     });
 
     it('should return false for date out of range', () => {

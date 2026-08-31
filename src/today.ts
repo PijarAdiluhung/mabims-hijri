@@ -32,7 +32,7 @@ export async function today(
     }
   }
 
-  if (isBundledDateAvailable(dateStr)) {
+  if (isBundledDateAvailable(dateStr, 'gregorian')) {
     const hijri = getBundledDate(dateStr);
     if (hijri) {
       const response: TodayResponse = {
