@@ -1,11 +1,11 @@
-# mabims
+# mabims-hijri
 
 > JavaScript client for [MABIMS.dev](https://mabims.dev) — the Indonesian Hijri calendar API.
 
-[![npm version](https://img.shields.io/npm/v/mabims.svg)](https://www.npmjs.com/package/mabims)
-[![license](https://img.shields.io/npm/l/mabims.svg)](https://github.com/pixostudio/mabims-js/blob/main/LICENSE)
+[![npm version](https://img.shields.io/npm/v/mabims-hijri.svg)](https://www.npmjs.com/package/mabims-hijri)
+[![license](https://img.shields.io/npm/l/mabims-hijri.svg)](https://github.com/PijarAdiluhung/mabims-hijri/blob/main/LICENSE)
 
-**[mabims.dev](https://mabims.dev)** · **[GitHub](https://github.com/pixostudio/mabims-js)** · **[API Docs](https://mabims.dev/docs)**
+**[mabims.dev](https://mabims.dev)** · **[GitHub](https://github.com/PijarAdiluhung/mabims-hijri)** · **[API Docs](https://mabims.dev/docs)**
 
 ---
 
@@ -26,13 +26,13 @@ This NPM package wraps the MABIMS API with **offline-first** capabilities — bu
 ## Install
 
 ```bash
-npm install mabims
+npm install mabims-hijri
 ```
 
 ## Quick Start
 
 ```typescript
-import { today } from 'mabims';
+import { today } from 'mabims-hijri';
 
 const date = await today();
 console.log(date.output);
@@ -69,7 +69,7 @@ console.log(date.output);
 Returns today's Hijri date based on timezone.
 
 ```typescript
-import { today } from 'mabims';
+import { today } from 'mabims-hijri';
 
 // Default: Asia/Jakarta
 const date = await today();
@@ -117,7 +117,7 @@ interface HijriDate {
 Convert a date between Gregorian and Hijri. Uses bundled data when available.
 
 ```typescript
-import { convert } from 'mabims';
+import { convert } from 'mabims-hijri';
 
 // Gregorian → Hijri (default)
 const hijri = await convert('2026-08-31');
@@ -143,7 +143,7 @@ console.log(gregorian.output);
 Bulk conversion for a date range (max 45 days).
 
 ```typescript
-import { range } from 'mabims';
+import { range } from 'mabims-hijri';
 
 const result = await range('2026-08-31', '2026-09-05');
 console.log(result.count);  // 6
@@ -190,7 +190,7 @@ interface DateItem {
 Look up a Gregorian date in the bundled MABIMS table. Returns `null` if outside range.
 
 ```typescript
-import { getBundledDate } from 'mabims';
+import { getBundledDate } from 'mabims-hijri';
 
 const hijri = getBundledDate('2026-08-31');
 // { date: '1448-03-18', month_name: 'Rabiul Awal', ... }
@@ -204,7 +204,7 @@ const missing = getBundledDate('2030-01-01');
 Returns the date range covered by bundled data.
 
 ```typescript
-import { getBundledRange } from 'mabims';
+import { getBundledRange } from 'mabims-hijri';
 
 getBundledRange();
 // { start: '2024-01-13', end: '2026-12-31' }
@@ -215,7 +215,7 @@ getBundledRange();
 Direct API call (no cache). Use when you need fresh data.
 
 ```typescript
-import { fetchToday } from 'mabims';
+import { fetchToday } from 'mabims-hijri';
 
 const data = await fetchToday('Asia/Jakarta');
 ```
@@ -225,7 +225,7 @@ const data = await fetchToday('Asia/Jakarta');
 Convert a date via the API.
 
 ```typescript
-import { fetchConvert } from 'mabims';
+import { fetchConvert } from 'mabims-hijri';
 
 // Gregorian → Hijri
 const hijri = await fetchConvert('2026-08-31', 'gregorian');
@@ -239,7 +239,7 @@ const greg = await fetchConvert('1448-03-18', 'hijri');
 Get API metadata (coverage, version, etc.).
 
 ```typescript
-import { fetchMeta } from 'mabims';
+import { fetchMeta } from 'mabims-hijri';
 
 const meta = await fetchMeta();
 // { method: 'mabims', computed_active: true, coverage: { ... } }
@@ -250,7 +250,7 @@ const meta = await fetchMeta();
 Works in Cloudflare Workers, Vercel Edge, Deno Deploy, etc.
 
 ```typescript
-import { today } from 'mabims';
+import { today } from 'mabims-hijri';
 
 export default {
   async fetch(request: Request): Promise<Response> {
@@ -265,7 +265,7 @@ export default {
 ## Browser
 
 ```typescript
-import { today } from 'mabims';
+import { today } from 'mabims-hijri';
 
 const date = await today();
 document.getElementById('hijri-date')!.textContent = date.output.date;
@@ -276,7 +276,7 @@ document.getElementById('hijri-date')!.textContent = date.output.date;
 Full type definitions included. Tree-shakeable — import only what you need.
 
 ```typescript
-import type { HijriDate, TodayResponse, ConvertResponse } from 'mabims';
+import type { HijriDate, TodayResponse, ConvertResponse } from 'mabims-hijri';
 ```
 
 ## Data Coverage

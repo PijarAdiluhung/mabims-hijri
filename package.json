@@ -1,5 +1,5 @@
 {
-  "name": "mabims",
+  "name": "mabims-hijri",
   "version": "1.0.0",
   "description": "MABIMS Hijri calendar NPM package",
   "main": "dist/index.js",
