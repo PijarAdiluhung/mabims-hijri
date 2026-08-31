@@ -299,6 +299,43 @@ console.log(result.mabims);
 console.log(result.source);  // 'mabims'
 ```
 
+## Error Handling
+
+Dates outside bundled range (2024–2026) require network. If API is unavailable:
+
+```typescript
+import { today, convert } from 'mabims-hijri';
+
+try {
+  const date = await today();
+  // Success
+} catch (e) {
+  // Offline + date not in bundled data
+  console.log('Error:', e.message);
+  // "Failed to fetch today: NetworkError"
+}
+```
+
+**Graceful fallback:**
+
+```typescript
+import { isBundledDateAvailable, today } from 'mabims-hijri';
+
+const todayStr = new Date().toISOString().split('T')[0];
+
+if (isBundledDateAvailable(todayStr, 'gregorian')) {
+  // Instant, offline
+  const date = await today();
+} else {
+  // Needs network — handle offline case
+  try {
+    const date = await today();
+  } catch {
+    showOfflineMessage();
+  }
+}
+```
+
 ## Edge Runtime
 
 Works in Cloudflare Workers, Vercel Edge, Deno Deploy, etc.
