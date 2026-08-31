@@ -2,9 +2,11 @@ import { TodayResponse } from './types';
 import { fetchToday } from './api';
 import { createCache } from './cache';
 import { getBundledDate, isBundledDateAvailable } from './bundled';
+import { init } from './table';
 
 const CACHE_KEY = 'today';
 const cache = createCache();
+let initialized = false;
 
 function getTodayKey(date: Date, tz: string): string {
   return `${date.toISOString().split('T')[0]}_${tz}`;
@@ -16,10 +18,20 @@ function getLocalDate(tz: string): Date {
   return new Date(formatted);
 }
 
+async function ensureInit(): Promise<void> {
+  if (!initialized) {
+    initialized = true;
+    await init();
+  }
+}
+
 export async function today(
   options: { tz?: string; forceRefresh?: boolean } = {}
 ): Promise<TodayResponse> {
   const { tz = 'Asia/Jakarta', forceRefresh = false } = options;
+  
+  await ensureInit();
+  
   const localDate = getLocalDate(tz);
   const dateStr = localDate.toISOString().split('T')[0];
   const cacheKey = getTodayKey(localDate, tz);
