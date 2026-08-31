@@ -1,0 +1,6 @@
+src/
+tests/
+bin/
+tsconfig.json
+MABIMS-NPM-ROADMAP.md
+.gitignore
