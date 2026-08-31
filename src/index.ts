@@ -9,4 +9,6 @@ export { fetchToday, fetchConvert, fetchMeta, fetchRange, fetchTable, fetchMonth
 export { getBundledDate, getBundledHijriDate, isBundledDateAvailable, getBundledRange, getBundledHijriRange } from './bundled';
 export { init, checkForUpdate, updateTable, getTable, getStoredTable } from './table';
 export { setCacheTTL, getCacheTTL } from './cache';
+export { setStorageAdapter, resetStorage } from './storage';
+export type { StorageAdapter } from './storage';
 export * from './types';

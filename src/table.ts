@@ -1,5 +1,5 @@
 import { fetchMeta, fetchTable } from './api';
-import { createStorage, StorageAdapter } from './storage';
+import { createStorage } from './storage';
 import bundledData from './data.json';
 
 const STORAGE_KEY = 'table';
@@ -13,15 +13,11 @@ interface StoredTable {
   timestamp: number;
 }
 
-let storage: StorageAdapter | null = null;
 let lastCheck = 0;
 let currentTable: StoredTable | null = null;
 
-function getStorage(): StorageAdapter {
-  if (!storage) {
-    storage = createStorage();
-  }
-  return storage;
+function getStorage() {
+  return createStorage();
 }
 
 /**

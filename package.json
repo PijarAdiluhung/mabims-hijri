@@ -1,14 +1,15 @@
 {
   "name": "mabims-hijri",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MABIMS Hijri calendar NPM package",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "module": "dist/index.js",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.js"
     }
   },
   "bin": {
