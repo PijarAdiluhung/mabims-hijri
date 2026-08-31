@@ -245,6 +245,60 @@ const meta = await fetchMeta();
 // { method: 'mabims', computed_active: true, coverage: { ... } }
 ```
 
+### `month(year, month, calendar?)`
+
+Get all days in a month with Hijri conversion.
+
+```typescript
+import { month } from 'mabims-hijri';
+
+const august = await month(2026, 8);
+console.log(august.count);  // 31
+console.log(august.items[0]);
+// { gregorian: '2026-08-01', hijri: '1448-02-18', source: 'mabims' }
+```
+
+### `year(year, calendar?)`
+
+Get all days in a year (12 months).
+
+```typescript
+import { year } from 'mabims-hijri';
+
+const data = await year(2026);
+console.log(data.count);  // 365
+console.log(Object.keys(data.months));  // ['1', '2', ..., '12']
+```
+
+### `events(year, calendar?)`
+
+Get Islamic events for a year (Ramadan, Idul Fitri, etc.).
+
+```typescript
+import { events } from 'mabims-hijri';
+
+const evts = await events(1446, 'hijri');
+console.log(evts.events);
+// [
+//   { event: 'awal_ramadan', name: 'Awal Ramadan', hijri: '1446-09-01', gregorian: '2025-03-01' },
+//   { event: 'idul_fitri', name: 'Idul Fitri', hijri: '1446-10-01', gregorian: '2025-03-31' },
+//   ...
+// ]
+```
+
+### `compare(date, options?)`
+
+Get MABIMS Hijri date with source info.
+
+```typescript
+import { compare } from 'mabims-hijri';
+
+const result = await compare('2026-08-31');
+console.log(result.mabims);
+// { date: '1448-03-18', calendar: 'hijri', month_name: 'Rabiul Awal', ... }
+console.log(result.source);  // 'mabims'
+```
+
 ## Edge Runtime
 
 Works in Cloudflare Workers, Vercel Edge, Deno Deploy, etc.

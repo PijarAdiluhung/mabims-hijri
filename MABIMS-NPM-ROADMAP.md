@@ -63,11 +63,11 @@
 
 ---
 
-## V6 — Polish / DX pass
+## V6 — Polish / DX pass ✅
 
-- [ ] Full TypeScript coverage + JSDoc for autocomplete
-- [ ] Tree-shakeable named exports (no default god-object)
-- [ ] Isomorphic: works in Node AND browser (fetch-based, no Node-only deps)
-- [ ] Optional CLI: `npx mabims-sync` to force-refresh bundled data (good for CI)
-- [ ] Configurable cache TTL (default ~24h–7d)
-- [ ] Docs site or thorough README with examples for each function
+- [x] Full TypeScript coverage + JSDoc for autocomplete
+- [x] Tree-shakeable named exports (no default god-object)
+- [x] Isomorphic: works in Node AND browser (fetch-based, no Node-only deps)
+- [x] Optional CLI: `npx mabims-sync` to force-refresh bundled data (good for CI)
+- [x] Configurable cache TTL (default ~24h–7d)
+- [x] Docs site or thorough README with examples for each function
