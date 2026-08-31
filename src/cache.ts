@@ -9,6 +9,7 @@ interface CacheStore {
   get<T>(key: string): T | null;
   set<T>(key: string, value: T): void;
   has(key: string): boolean;
+  getTimestamp(key: string): number | null;
 }
 
 class NodeCache implements CacheStore {
@@ -29,6 +30,11 @@ class NodeCache implements CacheStore {
   
   has(key: string): boolean {
     return this.store.has(key);
+  }
+  
+  getTimestamp(key: string): number | null {
+    const entry = this.store.get(key);
+    return entry?.timestamp ?? null;
   }
 }
 
@@ -61,6 +67,17 @@ class BrowserCache implements CacheStore {
   has(key: string): boolean {
     return localStorage.getItem(this.prefix + key) !== null;
   }
+  
+  getTimestamp(key: string): number | null {
+    try {
+      const item = localStorage.getItem(this.prefix + key);
+      if (!item) return null;
+      const entry: CacheEntry<any> = JSON.parse(item);
+      return entry.timestamp ?? null;
+    } catch {
+      return null;
+    }
+  }
 }
 
 export function createCache(): CacheStore {
@@ -76,7 +93,7 @@ export function isCacheValid(
   maxAgeMs: number
 ): boolean {
   if (!cache.has(key)) return false;
-  const entry = cache.get<CacheEntry<any>>(key);
-  if (!entry || !entry.timestamp) return false;
-  return Date.now() - entry.timestamp < maxAgeMs;
+  const timestamp = cache.getTimestamp(key);
+  if (timestamp === null) return false;
+  return Date.now() - timestamp < maxAgeMs;
 }

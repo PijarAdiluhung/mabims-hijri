@@ -14,7 +14,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "test": "echo \"Tests coming in V2\" && exit 0",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "lint": "tsc --noEmit"
   },
   "keywords": [
@@ -26,13 +27,13 @@
   ],
   "author": "PIXO Studio",
   "license": "MIT",
-
   "files": [
     "dist",
     "README.md"
   ],
   "devDependencies": {
     "@types/node": "^26.4.0",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
   }
 }

@@ -75,8 +75,3 @@
 
 ---
 
-## Naming Note
-
-> Consider whether "mabims-today" should later become the base package (e.g. "mabims-dev" or "mabims-js") once it grows past just `today()` — or keep "mabims-today" lightweight/standalone and split convert/calendar features into a separate "mabims-dev" package that depends on it.
->
-> **Decide before V2 to avoid a confusing rename later.**
