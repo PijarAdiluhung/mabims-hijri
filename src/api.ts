@@ -1,4 +1,4 @@
-import { TodayResponse, ConvertResponse, MetaResponse, RangeResponse, TableResponse } from './types';
+import { TodayResponse, ConvertResponse, MetaResponse, RangeResponse, TableResponse, MonthResponse, YearResponse, EventsResponse } from './types';
 
 const BASE_URL = 'https://api.mabims.dev/api/v1';
 
@@ -61,6 +61,56 @@ export async function fetchTable(): Promise<TableResponse> {
   const response = await fetch(`${BASE_URL}/table`);
   if (!response.ok) {
     throw new Error(`Failed to fetch table: ${response.statusText}`);
+  }
+  
+  return response.json();
+}
+
+export async function fetchMonth(
+  year: number,
+  month: number,
+  calendar: 'hijri' | 'gregorian' = 'gregorian'
+): Promise<MonthResponse> {
+  const url = new URL(`${BASE_URL}/month`);
+  url.searchParams.set('year', year.toString());
+  url.searchParams.set('month', month.toString());
+  url.searchParams.set('calendar', calendar);
+  
+  const response = await fetch(url.toString());
+  if (!response.ok) {
+    throw new Error(`Failed to fetch month: ${response.statusText}`);
+  }
+  
+  return response.json();
+}
+
+export async function fetchYear(
+  year: number,
+  calendar: 'hijri' | 'gregorian' = 'gregorian'
+): Promise<YearResponse> {
+  const url = new URL(`${BASE_URL}/year`);
+  url.searchParams.set('year', year.toString());
+  url.searchParams.set('calendar', calendar);
+  
+  const response = await fetch(url.toString());
+  if (!response.ok) {
+    throw new Error(`Failed to fetch year: ${response.statusText}`);
+  }
+  
+  return response.json();
+}
+
+export async function fetchEvents(
+  year: number,
+  calendar: 'hijri' | 'gregorian' = 'hijri'
+): Promise<EventsResponse> {
+  const url = new URL(`${BASE_URL}/events`);
+  url.searchParams.set('year', year.toString());
+  url.searchParams.set('calendar', calendar);
+  
+  const response = await fetch(url.toString());
+  if (!response.ok) {
+    throw new Error(`Failed to fetch events: ${response.statusText}`);
   }
   
   return response.json();

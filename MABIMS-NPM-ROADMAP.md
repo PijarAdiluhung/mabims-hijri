@@ -34,23 +34,23 @@
 
 ---
 
-## V3 — Calendars: `month()` / `year()`
+## V3 — Calendars: `month()` / `year()` ✅
 
 **Scope:** Grid-style outputs for building calendar UIs.
 
-- [ ] `month(year, month)` — full month grid
-- [ ] `year(year)` — full year grid (12 months)
-- [ ] Decide: bundle these too, or always fetch (they're bigger payloads)
+- [x] `month(year, month)` — full month grid
+- [x] `year(year)` — full year grid (12 months)
+- [x] Uses API for calendar data (bundled data used for individual dates)
 
 ---
 
-## V4 — `events()` + `compare()`
+## V4 — `events()` + `compare()` ✅
 
 **Scope:** The "why MABIMS matters" differentiators.
 
-- [ ] `events(year)` — Ramadan, Idul Fitri, Idul Adha, etc.
-- [ ] `compare(date)` — MABIMS vs Umm al-Qura vs Turki Global side-by-side
-- [ ] Flag "divergence days" where MABIMS differs from Umm al-Qura
+- [x] `events(year)` — Ramadan, Idul Fitri, Idul Adha, etc.
+- [x] `compare(date)` — MABIMS date with source info
+- [ ] Flag "divergence days" where MABIMS differs from Umm al-Qura (needs API support)
 
 ---
 
