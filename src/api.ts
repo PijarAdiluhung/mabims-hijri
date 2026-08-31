@@ -1,4 +1,4 @@
-import { TodayResponse, ConvertResponse, MetaResponse, RangeResponse } from './types';
+import { TodayResponse, ConvertResponse, MetaResponse, RangeResponse, TableResponse } from './types';
 
 const BASE_URL = 'https://api.mabims.dev/api/v1';
 
@@ -52,6 +52,15 @@ export async function fetchRange(
   const response = await fetch(url.toString());
   if (!response.ok) {
     throw new Error(`Failed to fetch range: ${response.statusText}`);
+  }
+  
+  return response.json();
+}
+
+export async function fetchTable(): Promise<TableResponse> {
+  const response = await fetch(`${BASE_URL}/table`);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch table: ${response.statusText}`);
   }
   
   return response.json();

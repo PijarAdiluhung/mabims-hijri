@@ -1,5 +1,4 @@
-import { MetaResponse } from './types';
-import { fetchMeta } from './api';
+import { fetchMeta, fetchTable } from './api';
 import { createStorage, StorageAdapter } from './storage';
 import bundledData from './data.json';
 
@@ -16,6 +15,7 @@ interface StoredTable {
 
 let storage: StorageAdapter | null = null;
 let lastCheck = 0;
+let currentTable: StoredTable | null = null;
 
 function getStorage(): StorageAdapter {
   if (!storage) {
@@ -25,12 +25,15 @@ function getStorage(): StorageAdapter {
 }
 
 export function getStoredTable(): StoredTable | null {
+  if (currentTable) return currentTable;
+  
   const store = getStorage();
   const raw = store.get(STORAGE_KEY);
   if (!raw) return null;
   
   try {
-    return JSON.parse(raw);
+    currentTable = JSON.parse(raw);
+    return currentTable;
   } catch {
     return null;
   }
@@ -75,10 +78,19 @@ export async function checkForUpdate(force: boolean = false): Promise<boolean> {
 
 export async function updateTable(): Promise<boolean> {
   try {
-    const meta = await fetchMeta();
+    const tableData = await fetchTable();
     const store = getStorage();
     
-    store.set(VERSION_KEY, (meta as any).data_version);
+    const newTable: StoredTable = {
+      gregorian_to_hijri: tableData.gregorian_to_hijri,
+      hijri_to_gregorian: tableData.hijri_to_gregorian,
+      version: tableData.version,
+      timestamp: Date.now(),
+    };
+    
+    store.set(STORAGE_KEY, JSON.stringify(newTable));
+    store.set(VERSION_KEY, tableData.version);
+    currentTable = newTable;
     
     return true;
   } catch {

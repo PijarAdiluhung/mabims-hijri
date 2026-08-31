@@ -71,3 +71,9 @@ export interface RangeResponse {
   items: DateItem[];
   warnings: string[];
 }
+
+export interface TableResponse {
+  version: string;
+  gregorian_to_hijri: Record<string, string>;
+  hijri_to_gregorian: Record<string, string>;
+}
