@@ -311,21 +311,6 @@ console.log(evts.events);
 
 ---
 
-### `compare(date, options?)`
-
-Like `convert()`, but also returns metadata about where the data came from (bundled table vs. computed/algorithmic).
-
-```typescript
-import { compare } from 'mabims-hijri';
-
-const result = await compare('2026-08-31');
-console.log(result.mabims);
-// { date: '1448-03-18', calendar: 'hijri', month_name: 'Rabiul Awal', ... }
-console.log(result.source);  // 'mabims'
-```
-
----
-
 ### Low-Level API Functions
 
 These bypass the cache and call the MABIMS API directly. Use them when you need fresh data or want to manage caching yourself.
