@@ -44,22 +44,20 @@
 
 ---
 
-## V4 — `events()` + `compare()` ✅
+## V4 — `events()` ✅
 
 **Scope:** The "why MABIMS matters" differentiators.
 
 - [x] `events(year)` — Ramadan, Idul Fitri, Idul Adha, etc.
-- [x] `compare(date)` — MABIMS date with source info
-- [ ] Flag "divergence days" where MABIMS differs from Umm al-Qura (needs API support)
 
 ---
 
-## V5 — Hilal visualization
+## V5 — Hilal visibility ✅ (partial)
 
 **Scope:** The most unique mabims.dev feature.
 
-- [ ] `hilal.info(month, year)` — visibility data/criteria
-- [ ] `hilal.viz(month, year)` — returns PNG URL or Buffer (720×1280 sky chart)
+- [x] `hilal.info(month, year)` — visibility data (moon altitude, elongation, visibility)
+- [ ] `hilal.viz(month, year)` — PNG sky chart (not included in npm, use API directly)
 
 ---
 

@@ -128,3 +128,48 @@ export interface EventsResponse {
   events: EventItem[];
   warnings: string[];
 }
+
+export interface HilalInfoInput {
+  month: number;
+  year: number;
+}
+
+export interface HilalMonth {
+  name: string;
+  number: number;
+  year: number;
+  start: string;
+}
+
+export interface HilalPrevMonth {
+  name: string;
+  number: number;
+  year: number;
+  length: number;
+}
+
+export interface HilalEvening {
+  hijri_date: string;
+  hijri_day: number;
+  gregorian_date: string;
+  sunset: string;
+  moonset: string;
+  moon_alt_deg: number;
+  moon_az_deg: number;
+  sun_alt_deg: number;
+  elongation_deg: number;
+  illumination_pct: number;
+  age_hours: number;
+  alt_ok: boolean;
+  elong_ok: boolean;
+  visible: boolean;
+}
+
+export interface HilalInfoResponse {
+  input: HilalInfoInput;
+  month: HilalMonth;
+  previous_month: HilalPrevMonth;
+  evening: HilalEvening;
+  source: string;
+  warnings: string[];
+}

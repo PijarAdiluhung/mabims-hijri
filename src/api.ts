@@ -1,4 +1,4 @@
-import { TodayResponse, ConvertResponse, MetaResponse, RangeResponse, TableResponse, MonthResponse, YearResponse, EventsResponse } from './types';
+import { TodayResponse, ConvertResponse, MetaResponse, RangeResponse, TableResponse, MonthResponse, YearResponse, EventsResponse, HilalInfoResponse } from './types';
 
 const BASE_URL = 'https://api.mabims.dev/api/v1';
 
@@ -111,6 +111,22 @@ export async function fetchEvents(
   const response = await fetch(url.toString());
   if (!response.ok) {
     throw new Error(`Failed to fetch events: ${response.statusText}`);
+  }
+  
+  return response.json();
+}
+
+export async function fetchHilalInfo(
+  month: number,
+  year: number
+): Promise<HilalInfoResponse> {
+  const url = new URL(`${BASE_URL}/hilal/info`);
+  url.searchParams.set('month', month.toString());
+  url.searchParams.set('year', year.toString());
+  
+  const response = await fetch(url.toString());
+  if (!response.ok) {
+    throw new Error(`Failed to fetch hilal info: ${response.statusText}`);
   }
   
   return response.json();

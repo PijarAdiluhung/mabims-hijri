@@ -311,6 +311,44 @@ console.log(evts.events);
 
 ---
 
+### `hilal.info(month, year)`
+
+Get hilal (moon) visibility data for determining the start of a Hijri month. Uses MABIMS criteria based on observations from Sabang, Indonesia.
+
+```typescript
+import { hilal } from 'mabims-hijri';
+
+const info = await hilal.info(9, 1447); // Ramadhan 1447
+console.log(info.month.name);            // 'Ramadhan'
+console.log(info.month.start);           // '2026-02-19'
+console.log(info.evening.visible);       // true or false
+console.log(info.evening.moon_alt_deg);  // moon altitude in degrees
+console.log(info.evening.elongation_deg); // elongation in degrees
+console.log(info.evening.illumination_pct); // illumination percentage
+```
+
+**Returns:**
+
+| Field | Description |
+|-------|-------------|
+| `month.name` | Hijri month name |
+| `month.start` | Gregorian date of month start |
+| `previous_month.name` | Previous Hijri month name |
+| `previous_month.length` | Length of previous month |
+| `evening.hijri_date` | Hijri date of the evening (e.g. "29 Sya'ban 1447 H") |
+| `evening.gregorian_date` | Gregorian date of the evening |
+| `evening.sunset` | Local sunset time |
+| `evening.moonset` | Local moonset time |
+| `evening.moon_alt_deg` | Moon altitude at sunset (degrees) |
+| `evening.elongation_deg` | Moon-sun elongation (degrees) |
+| `evening.illumination_pct` | Moon illumination percentage |
+| `evening.age_hours` | Moon age in hours |
+| `evening.visible` | Whether MABIMS criteria are met (`alt_ok` AND `elong_ok`) |
+| `source` | `'mabims'` (curated table) or `'mabims-computed'` (algorithmic estimate) |
+| `warnings` | Borderline months or computed fallback info |
+
+---
+
 ### Low-Level API Functions
 
 These bypass the cache and call the MABIMS API directly. Use them when you need fresh data or want to manage caching yourself.
@@ -323,6 +361,7 @@ These bypass the cache and call the MABIMS API directly. Use them when you need 
 | `fetchMonth(year, month, calendar)` | Full month via the API |
 | `fetchYear(year, calendar)` | Full year via the API |
 | `fetchEvents(year, calendar)` | Islamic events via the API |
+| `fetchHilalInfo(month, year)` | Hilal visibility data via the API |
 | `fetchMeta()` | API metadata (coverage, version, etc.) |
 | `fetchTable()` | Download the full calendar table (JSON) |
 
