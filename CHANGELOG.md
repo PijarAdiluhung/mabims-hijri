@@ -7,12 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-09-02
+
 ### Changed
 - Expanded bundled data coverage from 2024-01-13 to **2023-01-23** (Hijri 1444-07-01)
 - Bundled data now matches MABIMS API's full curated table (Hijri 1444–1448)
 
 ### Added
 - `npx mabims-sync` now writes fetched data to `src/data.json` (was print-only)
+- `CHANGELOG.md`
 
 ## [1.0.2] - 2025
 
@@ -52,7 +55,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript definitions
 - Zero dependencies (native `fetch` only)
 
-[Unreleased]: https://github.com/PijarAdiluhung/mabims-hijri/compare/v1.0.2...HEAD
+[Unreleased]: https://github.com/PijarAdiluhung/mabims-hijri/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/PijarAdiluhung/mabims-hijri/compare/v1.0.2...v1.1.0
 [1.0.2]: https://github.com/PijarAdiluhung/mabims-hijri/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/PijarAdiluhung/mabims-hijri/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/PijarAdiluhung/mabims-hijri/releases/tag/v1.0.0
