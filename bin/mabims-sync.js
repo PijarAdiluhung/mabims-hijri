@@ -4,11 +4,14 @@
  * mabims-sync - Force refresh bundled MABIMS data
  *
  * Usage:
- *   npx mabims-sync
- *   npx mabims-sync --check
+ *   npx mabims-sync          # Fetch and write to src/data.json
+ *   npx mabims-sync --check  # Check for updates only
+ *   npx mabims-sync --out <path>  # Write to custom path
  */
 
 const BASE_URL = 'https://api.mabims.dev/api/v1';
+const fs = require('fs');
+const path = require('path');
 
 async function checkVersion() {
   console.log('Checking for updates...');
@@ -38,6 +41,8 @@ async function fetchTable() {
 async function main() {
   const args = process.argv.slice(2);
   const checkOnly = args.includes('--check');
+  const outIndex = args.indexOf('--out');
+  const outPath = outIndex !== -1 ? args[outIndex + 1] : null;
 
   try {
     const meta = await checkVersion();
@@ -46,8 +51,16 @@ async function main() {
       process.exit(0);
     }
 
-    await fetchTable();
-    console.log('\nSync complete! Table data is now up to date.');
+    const table = await fetchTable();
+
+    const outputPath = outPath || path.join(__dirname, '..', 'src', 'data.json');
+    const outputData = {
+      gregorian_to_hijri: table.gregorian_to_hijri,
+      hijri_to_gregorian: table.hijri_to_gregorian,
+    };
+
+    fs.writeFileSync(outputPath, JSON.stringify(outputData, null, 2) + '\n');
+    console.log(`\nSync complete! Written to: ${outputPath}`);
   } catch (error) {
     console.error('Error:', error.message);
     process.exit(1);

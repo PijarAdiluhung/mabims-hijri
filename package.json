@@ -31,10 +31,15 @@
   ],
   "author": "PIXO Studio",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PijarAdiluhung/mabims-hijri"
+  },
   "files": [
     "dist",
     "bin",
-    "README.md"
+    "README.md",
+    "CHANGELOG.md"
   ],
   "devDependencies": {
     "@types/node": "^26.4.0",

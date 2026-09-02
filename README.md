@@ -13,13 +13,13 @@
 
 This package gives you Hijri (Islamic) calendar tools for free — no API key, no sign-up, no rate limits.
 
-It wraps the [MABIMS.dev](https://mabims.dev) REST API and bundles a **snapshot of the official MABIMS calendar table** right inside the package. That means for dates between **January 2024 and December 2026**, you get instant results with zero network requests. If you need dates outside that range, it automatically fetches from the live API as a fallback.
+It wraps the [MABIMS.dev](https://mabims.dev) REST API and bundles a **snapshot of the official MABIMS calendar table** right inside the package. That means for dates between **January 2023 and December 2026**, you get instant results with zero network requests. If you need dates outside that range, it automatically fetches from the live API as a fallback.
 
 ### What Is MABIMS.dev?
 
 [MABIMS.dev](https://mabims.dev) is an unofficial, free, open-source API that provides an ecosystem for the **Indonesian Hijri calendar**. It delivers date conversion, monthly and yearly calendars, hilal visibility data, and Islamic event dates — all based on **MABIMS criteria** from **Kementerian Agama Republik Indonesia** (the Indonesian Ministry of Religious Affairs).
 
-Dates within the curated table (2024–2026) come from official publicly available MABIMS data. Dates beyond that use **Neo MABIMS** — an algorithmic computation based on astronomical criteria (moon altitude ≥ 3°, elongation ≥ 6.4° at sunset in Sabang, Indonesia's westernmost point).
+Dates within the curated table (2023–2026) come from official publicly available MABIMS data. Dates beyond that use **Neo MABIMS** — an algorithmic computation based on astronomical criteria (moon altitude ≥ 3°, elongation ≥ 6.4° at sunset in Sabang, Indonesia's westernmost point).
 
 This NPM package wraps that API with offline-first capabilities — bundled calendar data means instant results with no network requests, while background refresh keeps your data up to date.
 
@@ -31,7 +31,7 @@ This NPM package wraps that API with offline-first capabilities — bundled cale
 
 | Benefit | What It Means |
 |---------|---------------|
-| **Offline-first** | Bundled data covers 2024–2026. No network needed for most use cases. |
+| **Offline-first** | Bundled data covers 2023–2026. No network needed for most use cases. |
 | **Self-refreshing** | Silently checks for newer data once a day and updates the cache in the background. |
 | **Works everywhere** | Node.js (v18+), browsers, React Native, edge runtimes — anywhere `fetch` exists. |
 | **Zero dependencies** | Only uses native `fetch`. Nothing else gets pulled into your bundle. |
@@ -94,10 +94,10 @@ The package uses a three-tier data strategy to balance speed and freshness:
 │  (data.json)      │     │  (per-session)   │     │  (mabims.dev)     │
 └───────────────────┘     └──────────────────┘     └───────────────────┘
       Built-in                 Always fast            Fallback only
-      2024–2026                (TTL: 24h)             (outside range)
+      2023–2026                (TTL: 24h)             (outside range)
 ```
 
-1. **Bundled data** (`data.json`, ~72 KB) ships with the package. It contains a complete bidirectional mapping of every day from 2024-01-13 to 2026-12-31. Lookups are instant and require no network.
+1. **Bundled data** (`data.json`) ships with the package. It contains a complete bidirectional mapping of every day from 2023-01-23 to 2026-12-31. Lookups are instant and require no network.
 
 2. **In-memory cache** stores results from the API (or bundled lookups) for 24 hours by default. On subsequent calls, the cache is checked first.
 
@@ -372,7 +372,7 @@ Access the bundled snapshot directly, without touching the API or cache.
 ```typescript
 import { getBundledDate, getBundledRange } from 'mabims-hijri';
 
-// Look up a single date (returns null if outside 2024–2026)
+// Look up a single date (returns null if outside 2023–2026)
 const hijri = getBundledDate('2026-08-31');
 // { date: '1448-03-18', month_name: 'Rabiul Awal', ... }
 
@@ -381,7 +381,7 @@ const missing = getBundledDate('2030-01-01');
 
 // Check the date range covered by bundled data
 getBundledRange();
-// { start: '2024-01-13', end: '2026-12-31' }
+// { start: '2023-01-23', end: '2026-12-31' }
 ```
 
 ---
@@ -600,7 +600,7 @@ import type { HijriDate, TodayResponse, ConvertResponse, StorageAdapter } from '
 
 | Date Range | Source | Network Required? |
 |------------|--------|-------------------|
-| 2024-01-13 to 2026-12-31 | Bundled MABIMS table (Hijri 1445–1448) | No |
+| 2023-01-23 to 2026-12-31 | Bundled MABIMS table (Hijri 1444–1448) | No |
 | After 2026 | Live API (computed Neo MABIMS) | Yes |
 
 The bundled data is a snapshot of the official MABIMS calendar table. The live API extends this with algorithmic computation (Neo MABIMS) for dates beyond 2026, using astronomical data from the Skyfield library.

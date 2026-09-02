@@ -19,11 +19,19 @@ describe('bundled', () => {
     });
 
     it('should handle start of bundled range', () => {
-      const result = getBundledDate('2024-01-13');
+      const result = getBundledDate('2023-01-23');
       expect(result).not.toBeNull();
-      expect(result?.year).toBe(1445);
+      expect(result?.year).toBe(1444);
       expect(result?.month).toBe(7);
       expect(result?.day).toBe(1);
+    });
+
+    it('should handle 2023 dates', () => {
+      const result = getBundledDate('2023-12-31');
+      expect(result).not.toBeNull();
+      expect(result?.year).toBe(1445);
+      expect(result?.month).toBe(6);
+      expect(result?.day).toBe(18);
     });
 
     it('should handle end of bundled range', () => {
@@ -59,7 +67,7 @@ describe('bundled', () => {
   describe('getBundledRange', () => {
     it('should return correct range', () => {
       const range = getBundledRange();
-      expect(range.start).toBe('2024-01-13');
+      expect(range.start).toBe('2023-01-23');
       expect(range.end).toBe('2026-12-31');
     });
   });
