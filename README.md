@@ -343,7 +343,7 @@ console.log(info.evening.sites_checked); // number of sites evaluated
 | `evening.moonset` | Local moonset time |
 | `evening.moon_alt_deg` | Moon altitude at sunset (degrees) |
 | `evening.elongation_deg` | Moon-sun elongation (degrees) |
-| `evening.deciding_site` | Site that decided the verdict — `{ name, lat, lon, elev_m, tz }`, or `null` when seen nowhere |
+| `evening.deciding_site` | Site the reported values describe — `{ name, lat, lon, elev_m, tz }`: the deciding site when visible, otherwise the best-margin site |
 | `evening.sites_checked` | Number of coastal observation sites evaluated |
 | `evening.illumination_pct` | Moon illumination percentage |
 | `evening.age_hours` | Moon age in hours |

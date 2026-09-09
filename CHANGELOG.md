@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.2.0] - 2026-09-09
 
 ### Added
-- `HilalEvening.deciding_site` — `{ name, lat, lon, elev_m, tz }` of the coastal site that decided the verdict (`null` when seen nowhere); optional field, present with MABIMS API v1.5+
+- `HilalEvening.deciding_site` — `{ name, lat, lon, elev_m, tz }` of the site the reported values describe: the decider when visible, the best-margin site otherwise; optional field, present with MABIMS API v1.5+
 - `HilalEvening.sites_checked` — number of coastal observation sites evaluated; optional field, present with MABIMS API v1.5+
 
 ### Changed

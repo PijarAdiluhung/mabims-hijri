@@ -168,8 +168,8 @@ export interface HilalEvening {
   elongation_deg: number;
   illumination_pct: number;
   age_hours: number;
-  /** Coastal observation site where the criteria were met (null when seen nowhere). Added in API v1.5. */
-  deciding_site?: DecidingSite | null;
+  /** Coastal observation site the reported values describe — the deciding site when visible, otherwise the best-margin site. Added in API v1.5. */
+  deciding_site?: DecidingSite;
   /** Number of coastal observation sites evaluated. Added in API v1.5. */
   sites_checked?: number;
   alt_ok: boolean;
