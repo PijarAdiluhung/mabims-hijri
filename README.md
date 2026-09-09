@@ -19,7 +19,7 @@ It wraps the [MABIMS.dev](https://mabims.dev) REST API and bundles a **snapshot 
 
 [MABIMS.dev](https://mabims.dev) is an unofficial, free, open-source API that provides an ecosystem for the **Indonesian Hijri calendar**. It delivers date conversion, monthly and yearly calendars, hilal visibility data, and Islamic event dates — all based on **MABIMS criteria** from **Kementerian Agama Republik Indonesia** (the Indonesian Ministry of Religious Affairs).
 
-Dates within the curated table (2023–2026) come from official publicly available MABIMS data. Dates beyond that use **Neo MABIMS** — an algorithmic computation based on astronomical criteria (moon altitude ≥ 3°, elongation ≥ 6.4° at sunset in Sabang, Indonesia's westernmost point).
+Dates within the curated table (2023–2026) come from official publicly available MABIMS data. Dates beyond that use **Neo MABIMS** — an algorithmic computation based on astronomical criteria (moon altitude ≥ 3°, elongation ≥ 6.4° at local sunset, evaluated at coastal observation points across Indonesia).
 
 This NPM package wraps that API with offline-first capabilities — bundled calendar data means instant results with no network requests, while background refresh keeps your data up to date.
 
@@ -313,7 +313,7 @@ console.log(evts.events);
 
 ### `hilal.info(month, year)`
 
-Get hilal (moon) visibility data for determining the start of a Hijri month. Uses MABIMS criteria based on observations from Sabang, Indonesia.
+Get hilal (moon) visibility data for determining the start of a Hijri month. Uses MABIMS criteria evaluated at coastal observation points across Indonesia — met at any single site → 29-day month; the passing site is reported as `deciding_site`.
 
 ```typescript
 import { hilal } from 'mabims-hijri';
@@ -325,6 +325,8 @@ console.log(info.evening.visible);       // true or false
 console.log(info.evening.moon_alt_deg);  // moon altitude in degrees
 console.log(info.evening.elongation_deg); // elongation in degrees
 console.log(info.evening.illumination_pct); // illumination percentage
+console.log(info.evening.deciding_site?.name); // e.g. 'Sabang / Weh Island'
+console.log(info.evening.sites_checked); // number of sites evaluated
 ```
 
 **Returns:**
@@ -341,9 +343,11 @@ console.log(info.evening.illumination_pct); // illumination percentage
 | `evening.moonset` | Local moonset time |
 | `evening.moon_alt_deg` | Moon altitude at sunset (degrees) |
 | `evening.elongation_deg` | Moon-sun elongation (degrees) |
+| `evening.deciding_site` | Site that decided the verdict — `{ name, lat, lon, elev_m, tz }`, or `null` when seen nowhere |
+| `evening.sites_checked` | Number of coastal observation sites evaluated |
 | `evening.illumination_pct` | Moon illumination percentage |
 | `evening.age_hours` | Moon age in hours |
-| `evening.visible` | Whether MABIMS criteria are met (`alt_ok` AND `elong_ok`) |
+| `evening.visible` | Whether MABIMS criteria are met at any coastal site (`alt_ok` AND `elong_ok`) |
 | `source` | `'mabims'` (curated table) or `'mabims-computed'` (algorithmic estimate) |
 | `warnings` | Borderline months or computed fallback info |
 

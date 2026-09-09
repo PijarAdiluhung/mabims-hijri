@@ -148,6 +148,14 @@ export interface HilalPrevMonth {
   length: number;
 }
 
+export interface DecidingSite {
+  name: string;
+  lat: number;
+  lon: number;
+  elev_m: number;
+  tz: string;
+}
+
 export interface HilalEvening {
   hijri_date: string;
   hijri_day: number;
@@ -160,6 +168,10 @@ export interface HilalEvening {
   elongation_deg: number;
   illumination_pct: number;
   age_hours: number;
+  /** Coastal observation site where the criteria were met (null when seen nowhere). Added in API v1.5. */
+  deciding_site?: DecidingSite | null;
+  /** Number of coastal observation sites evaluated. Added in API v1.5. */
+  sites_checked?: number;
   alt_ok: boolean;
   elong_ok: boolean;
   visible: boolean;

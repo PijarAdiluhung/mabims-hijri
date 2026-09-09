@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-09-09
+
+### Added
+- `HilalEvening.deciding_site` — `{ name, lat, lon, elev_m, tz }` of the coastal site that decided the verdict (`null` when seen nowhere); optional field, present with MABIMS API v1.5+
+- `HilalEvening.sites_checked` — number of coastal observation sites evaluated; optional field, present with MABIMS API v1.5+
+
+### Changed
+- Docs: hilal criteria wording now reflects the multi-site model (topocentric altitude + geocentric elongation, evaluated at coastal observation points across Indonesia)
+
+### Notes
+- The API changed how `evening.moon_alt_deg` / `elongation_deg` / `sunset` / `moonset` are computed (deciding site, previously Sabang) — response shape unchanged. Bundled calendar data is unaffected.
+- Release after the API v1.5 deploy so `deciding_site` is live.
+
 ## [1.1.0] - 2026-09-02
 
 ### Changed
