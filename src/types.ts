@@ -16,6 +16,10 @@ export interface GregorianDate {
   year?: number;
 }
 
+export interface NextDate extends HijriDate {
+  source: string;
+}
+
 export interface TodayResponse {
   input: {
     date: string;
@@ -23,6 +27,11 @@ export interface TodayResponse {
     tz: string;
   };
   output: HijriDate;
+  /**
+   * The Hijri date that becomes current after this evening's maghrib (the next
+   * civil day's mapping). Present only when `today({ next: true })` is used.
+   */
+  next?: NextDate;
   source: string;
   warnings: string[];
 }

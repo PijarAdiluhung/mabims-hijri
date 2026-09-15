@@ -124,6 +124,10 @@ const kl = await today({ tz: 'Asia/Kuala_Lumpur' });
 
 // Force a fresh API call, bypassing cache
 const fresh = await today({ forceRefresh: true });
+
+// Also get the Hijri date that begins after this evening's maghrib
+const withNext = await today({ next: true });
+console.log(withNext.next?.date); // '1448-03-19'
 ```
 
 **Options:**
@@ -132,6 +136,7 @@ const fresh = await today({ forceRefresh: true });
 |-------|------|---------|-------------|
 | `tz` | `string` | `'Asia/Jakarta'` | IANA timezone name (e.g. `'Asia/Jakarta'`, `'Asia/Makassar'`, `'UTC'`) |
 | `forceRefresh` | `boolean` | `false` | Skip the cache and fetch fresh data from the API |
+| `next` | `boolean` | `false` | Also return `next`: the Hijri date that begins after this evening's maghrib (the next civil day's mapping). The SDK does not compute sunset — gate the flip on your own maghrib-time clock |
 
 **Returns:** `TodayResponse`
 
@@ -143,6 +148,7 @@ interface TodayResponse {
     tz: string;          // The timezone used, e.g. 'Asia/Jakarta'
   };
   output: HijriDate;    // The converted Hijri date
+  next?: HijriDate & { source: string }; // Date that begins after maghrib (only with { next: true })
   source: string;       // Where the data came from: 'mabims' or 'mabims-computed'
   warnings: string[];   // Any issues encountered during conversion
 }
@@ -359,7 +365,7 @@ These bypass the cache and call the MABIMS API directly. Use them when you need 
 
 | Function | Description |
 |----------|-------------|
-| `fetchToday(tz?)` | Fetch today's Hijri date from the API |
+| `fetchToday(tz?, next?)` | Fetch today's Hijri date from the API (set `next` to include the post-maghrib date) |
 | `fetchConvert(date, calendar)` | Convert a date via the API |
 | `fetchRange(start, end, calendar)` | Bulk range conversion via the API |
 | `fetchMonth(year, month, calendar)` | Full month via the API |

@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-09-15
+
+### Added
+- `today({ next: true })` — also returns `next`, the Hijri date that begins after this evening's maghrib (the next civil day's mapping), each with its own `source`. `TodayResponse.next` is optional.
+- `fetchToday(tz?, next?)` — set `next` to request the post-maghrib date from the API.
+
+### Notes
+- The SDK does not compute sunset: gate the flip on the client's own maghrib-time clock.
+- Works offline from bundled data for in-range dates; falls back to the API (`?next=true`) beyond the table, and omits `next` when offline.
+- SDK-side addition; pairs with MABIMS API v1.8+ but bundled dates work without it.
+
 ## [1.2.0] - 2026-09-09
 
 ### Added
@@ -68,7 +79,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript definitions
 - Zero dependencies (native `fetch` only)
 
-[Unreleased]: https://github.com/PijarAdiluhung/mabims-hijri/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/PijarAdiluhung/mabims-hijri/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/PijarAdiluhung/mabims-hijri/compare/v1.2.0...v1.3.0
+[1.2.0]: https://github.com/PijarAdiluhung/mabims-hijri/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/PijarAdiluhung/mabims-hijri/compare/v1.0.2...v1.1.0
 [1.0.2]: https://github.com/PijarAdiluhung/mabims-hijri/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/PijarAdiluhung/mabims-hijri/compare/v1.0.0...v1.0.1

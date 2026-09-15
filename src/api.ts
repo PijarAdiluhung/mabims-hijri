@@ -2,9 +2,12 @@ import { TodayResponse, ConvertResponse, MetaResponse, RangeResponse, TableRespo
 
 const BASE_URL = 'https://api.mabims.dev/api/v1';
 
-export async function fetchToday(tz: string = 'Asia/Jakarta'): Promise<TodayResponse> {
+export async function fetchToday(tz: string = 'Asia/Jakarta', next = false): Promise<TodayResponse> {
   const url = new URL(`${BASE_URL}/today`);
   url.searchParams.set('tz', tz);
+  if (next) {
+    url.searchParams.set('next', 'true');
+  }
   
   const response = await fetch(url.toString());
   if (!response.ok) {
