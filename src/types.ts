@@ -5,6 +5,7 @@ export interface HijriDate {
   month: number;
   month_name: string;
   year: number;
+  weekday: string;
 }
 
 export interface GregorianDate {
@@ -14,6 +15,7 @@ export interface GregorianDate {
   month?: number;
   month_name?: string;
   year?: number;
+  weekday?: string;
 }
 
 export interface NextDate extends HijriDate {
@@ -68,6 +70,7 @@ export interface DateItem {
   month: number;
   month_name: string;
   year: number;
+  weekday: string;
 }
 
 export interface RangeResponse {
@@ -90,6 +93,7 @@ export interface TableResponse {
 export interface RangeItem {
   gregorian: string;
   hijri: string;
+  weekday: string;
   source: string;
 }
 

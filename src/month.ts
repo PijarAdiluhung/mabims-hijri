@@ -1,4 +1,5 @@
 import { MonthResponse, RangeItem } from './types';
+import { weekdayOf } from './weekday';
 import { getBundledDate, isBundledDateAvailable } from './bundled';
 import { createCache } from './cache';
 
@@ -64,6 +65,7 @@ export async function month(
         return {
           gregorian: day,
           hijri: hijri!.date,
+          weekday: weekdayOf(day),
           source: 'mabims' as const,
         };
       });

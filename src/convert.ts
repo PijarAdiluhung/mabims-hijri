@@ -2,6 +2,7 @@ import { ConvertResponse, HijriDate, GregorianDate } from './types';
 import { fetchConvert } from './api';
 import { getBundledDate, getBundledHijriDate, isBundledDateAvailable } from './bundled';
 import { createCache } from './cache';
+import { weekdayOf } from './weekday';
 
 const cache = createCache();
 
@@ -75,6 +76,7 @@ export async function convert(
             month: parseInt(parts[1]),
             month_name: '',
             year: parseInt(parts[0]),
+            weekday: weekdayOf(gregorian.date),
           },
           source: 'mabims',
           warnings: [],

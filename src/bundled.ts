@@ -1,5 +1,6 @@
 import { HijriDate, GregorianDate } from './types';
 import { getTable } from './table';
+import { weekdayOf } from './weekday';
 
 const MONTH_NAMES = [
   'Muharram', 'Safar', 'Rabiul Awal', 'Rabiul Akhir',
@@ -7,7 +8,7 @@ const MONTH_NAMES = [
   'Ramadhan', 'Syawal', "Dzulqa'dah", 'Dzulhijjah'
 ];
 
-function parseHijri(hijriStr: string): HijriDate {
+function parseHijri(hijriStr: string, gregorianIso: string): HijriDate {
   const [year, month, day] = hijriStr.split('-').map(Number);
   return {
     date: hijriStr,
@@ -16,6 +17,7 @@ function parseHijri(hijriStr: string): HijriDate {
     month,
     month_name: MONTH_NAMES[month - 1] || '',
     year,
+    weekday: weekdayOf(gregorianIso),
   };
 }
 
@@ -28,6 +30,7 @@ function parseGregorian(gregStr: string): GregorianDate {
     month,
     month_name: '',
     year,
+    weekday: weekdayOf(gregStr),
   };
 }
 
@@ -52,7 +55,7 @@ export function getBundledDate(gregorianDate: string): HijriDate | null {
   const table = getTable();
   const hijriStr = table.gregorian_to_hijri[gregorianDate];
   if (!hijriStr) return null;
-  return parseHijri(hijriStr);
+  return parseHijri(hijriStr, gregorianDate);
 }
 
 /**

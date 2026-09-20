@@ -60,7 +60,8 @@ console.log(date.output);
 //   day: 18,
 //   month: 3,
 //   month_name: 'Rabiul Awal',
-//   year: 1448
+//   year: 1448,
+//   weekday: 'Senin'
 // }
 ```
 
@@ -79,7 +80,7 @@ console.log(hijri.output);
 // Hijri → Gregorian
 const gregorian = await convert('1448-03-18', 'hijri');
 console.log(gregorian.output);
-// { date: '2026-08-31', calendar: 'gregorian', day: 31, month: 8, year: 2026 }
+// { date: '2026-08-31', calendar: 'gregorian', day: 31, month: 8, year: 2026, weekday: 'Senin' }
 ```
 
 ---
@@ -160,6 +161,7 @@ interface HijriDate {
   month: number;         // 3
   month_name: string;    // 'Rabiul Awal' (Indonesian name)
   year: number;          // 1448
+  weekday: string;       // 'Senin' ... 'Sabtu', 'Ahad' (Sunday is Ahad, not Minggu)
 }
 ```
 
@@ -215,8 +217,8 @@ const week = await range('2026-08-31', '2026-09-06');
 console.log(week.count);  // 7
 console.log(week.items);
 // [
-//   { input: '2026-08-31', output: '1448-03-18', calendar: 'hijri', month_name: 'Rabiul Awal', ... },
-//   { input: '2026-09-01', output: '1448-03-19', calendar: 'hijri', month_name: 'Rabiul Awal', ... },
+//   { input: '2026-08-31', output: '1448-03-18', calendar: 'hijri', month_name: 'Rabiul Awal', weekday: 'Senin', ... },
+//   { input: '2026-09-01', output: '1448-03-19', calendar: 'hijri', month_name: 'Rabiul Awal', weekday: 'Selasa', ... },
 //   ...
 // ]
 ```
@@ -248,6 +250,7 @@ interface DateItem {
   month: number;
   month_name: string; // e.g. 'Rabiul Awal'
   year: number;
+  weekday: string;    // 'Senin' ... 'Sabtu', 'Ahad'
 }
 ```
 
@@ -266,6 +269,7 @@ console.log(august.items[0]);
 // {
 //   gregorian: '2026-08-01',
 //   hijri: '1448-02-18',
+//   weekday: 'Sabtu',
 //   source: 'mabims',
 //   ...
 // }

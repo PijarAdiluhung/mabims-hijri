@@ -1,6 +1,7 @@
 import { RangeResponse, DateItem } from './types';
 import { getBundledDate, getBundledHijriDate, isBundledDateAvailable, getBundledRange } from './bundled';
 import { createCache } from './cache';
+import { weekdayOf } from './weekday';
 
 const cache = createCache();
 const MAX_RANGE_DAYS = 45;
@@ -110,6 +111,7 @@ export async function range(
           month: hijri!.month,
           month_name: hijri!.month_name,
           year: hijri!.year,
+          weekday: weekdayOf(day),
         };
       });
 
@@ -141,6 +143,7 @@ export async function range(
           month: m,
           month_name: '',
           year: y,
+          weekday: weekdayOf(gregorian!.date),
         };
       });
 
