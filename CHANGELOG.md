@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `events(year, calendar?, { include })` — `include` option (single token or array): `extra` adds the tier-2 observances (Isra Mi'raj 27 Rajab, Nuzulul Quran 17 Ramadan, Arafah 9 Dhul Hijjah, Tasu'a 9 Muharram, Ashura 10 Muharram, Tasyrik 11–13 Dhul Hijjah), `ayyamul_bidh` adds the white days (13–15 of every Hijri month, one ranged event per month), `all` adds everything, individual slugs cherry-pick. Base 5 events are always included.
+- `EventItem.date_range` — optional field for multi-day events (Tasyrik, Ayyamul Bidh) with `hijri_start`, `hijri_end`, `gregorian_start`, `gregorian_end`; `null` for single-day events.
+- `EventsInput.include` — echo of the requested include set; `null` when unset.
+- `fetchEvents(year, calendar?, include?)` — pass include through to the API.
+
+### Notes
+- `include` works offline: extras are computed from the bundled MABIMS table (fixed Hijri dates) within the bundled range, with API fallback outside it.
+- Cache keys now distinguish include sets, so `events(1446, 'hijri')` and `events(1446, 'hijri', { include: 'extra' })` do not collide.
+- Pairs with MABIMS API v1.9+; bundled extras work without it.
+
 ## [1.3.0] - 2026-09-15
 
 ### Added

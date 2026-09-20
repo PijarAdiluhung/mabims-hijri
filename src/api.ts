@@ -105,17 +105,21 @@ export async function fetchYear(
 
 export async function fetchEvents(
   year: number,
-  calendar: 'hijri' | 'gregorian' = 'hijri'
+  calendar: 'hijri' | 'gregorian' = 'hijri',
+  include?: string
 ): Promise<EventsResponse> {
   const url = new URL(`${BASE_URL}/events`);
   url.searchParams.set('year', year.toString());
   url.searchParams.set('calendar', calendar);
-  
+  if (include) {
+    url.searchParams.set('include', include);
+  }
+
   const response = await fetch(url.toString());
   if (!response.ok) {
     throw new Error(`Failed to fetch events: ${response.statusText}`);
   }
-  
+
   return response.json();
 }
 

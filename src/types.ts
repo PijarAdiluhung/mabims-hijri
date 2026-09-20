@@ -118,17 +118,33 @@ export interface YearResponse {
   warnings: string[];
 }
 
+export interface EventDateRange {
+  hijri_start: string;
+  hijri_end: string;
+  gregorian_start: string;
+  gregorian_end: string;
+}
+
 export interface EventItem {
   event: string;
   name: string;
   hijri: string;
   gregorian: string;
   source: string;
+  /**
+   * Inclusive span of a multi-day event (Tasyrik 11-13 Dzulhijjah,
+   * Ayyamul Bidh 13-15 of a month). null for single-day events.
+   */
+  date_range?: EventDateRange | null;
 }
 
 export interface EventsInput {
   year: number;
   calendar: string;
+  /**
+   * Echo of the `include` option; null/undefined when not requested.
+   */
+  include?: string[] | null;
 }
 
 export interface EventsResponse {

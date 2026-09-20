@@ -287,9 +287,9 @@ console.log(Object.keys(data.months)); // ['1', '2', ..., '12']
 
 ---
 
-### `events(year, calendar?)`
+### `events(year, calendar?, options?)`
 
-Get dates for the 5 major Islamic observances. Returns both Hijri and Gregorian dates for each event.
+Get Islamic event dates. By default returns the 5 base events; add `include` to unlock tier-2 observances, the Ayyamul Bidh series, individually cherry-picked slugs, or everything. Works offline within the bundled MABIMS range.
 
 ```typescript
 import { events } from 'mabims-hijri';
@@ -303,17 +303,40 @@ console.log(evts.events);
 //   { event: 'idul_fitri',     name: 'Idul Fitri',                hijri: '1446-10-01', gregorian: '2025-03-31' },
 //   { event: 'idul_adha',      name: 'Idul Adha',                 hijri: '1446-12-10', gregorian: '2025-06-08' },
 // ]
+
+// tier-2 observances + the white days
+const all = await events(2025, 'gregorian', { include: ['extra', 'ayyamul_bidh'] });
+const tasyrik = all.events.find(e => e.event === 'tasyrik');
+console.log(tasyrik?.date_range);
+// { hijri_start: '1446-12-11', hijri_end: '1446-12-13',
+//   gregorian_start: '2025-06-07', gregorian_end: '2025-06-09' }
 ```
 
-**Events included:**
+**Parameters:**
 
-| Slug | Event | Hijri Date |
-|------|-------|------------|
-| `1_muharram` | Islamic New Year | 1 Muharram |
-| `maulid_nabi` | Prophet Muhammad's Birthday | 12 Rabi' al-Awwal |
-| `awal_ramadan` | Start of Ramadan | 1 Ramadan |
-| `idul_fitri` | Eid al-Fitr (End of Ramadan) | 1 Shawwal |
-| `idul_adha` | Eid al-Adha (Feast of Sacrifice) | 10 Dhul Hijjah |
+| Param | Type | Default | Description |
+|-------|------|---------|-------------|
+| `year` | `number` | required | Hijri or Gregorian year |
+| `calendar` | `'gregorian' \| 'hijri'` | `'hijri'` | Which calendar the input year is in |
+| `options.include` | `'extra' \| 'ayyamul_bidh' \| 'all' \| slug \| array of them` | — | Optional extras: `extra` adds the tier-2 observances, `ayyamul_bidh` adds the white days (13–15 of every Hijri month, one ranged event per month), `all` adds everything. Base 5 are always included |
+| `options.forceRefresh` | `boolean` | `false` | Skip the cache |
+
+**Events included (default + extras):**
+
+| Slug | Event | Hijri Date | Set |
+|------|-------|------------|-----|
+| `1_muharram` | Islamic New Year | 1 Muharram | default |
+| `maulid_nabi` | Prophet Muhammad's Birthday | 12 Rabi' al-Awwal | default |
+| `awal_ramadan` | Start of Ramadan | 1 Ramadan | default |
+| `idul_fitri` | Eid al-Fitr (End of Ramadan) | 1 Shawwal | default |
+| `idul_adha` | Eid al-Adha (Feast of Sacrifice) | 10 Dhul Hijjah | default |
+| `isra_miraj` | Isra Mi'raj | 27 Rajab | `include` | 
+| `nuzulul_quran` | Nuzulul Quran | 17 Ramadan | `include` |
+| `arafah` | Arafah fasting (Wukuf) | 9 Dhul Hijjah | `include` |
+| `tasua` | Tasu'a fasting | 9 Muharram | `include` |
+| `asyura` | Ashura fasting | 10 Muharram | `include` |
+| `tasyrik` | Days of Tashriq | 11–13 Dhul Hijjah | `include` |
+| `ayyamul_bidh` | White-day fasting | 13–15 of every Hijri month | `include` |
 
 ---
 
