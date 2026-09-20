@@ -1,6 +1,6 @@
 # mabims-hijri
 
-> JavaScript/TypeScript client for the [MABIMS.dev](https://mabims.dev) API, an ecosystem for the **Indonesian Hijri calendar**, with built-in offline support.
+> JavaScript/TypeScript client for the [MABIMS.dev](https://mabims.dev) API, an ecosystem for the **Indonesian Hijri calendar** (kalender Hijriah MABIMS, berbasis kriteria [Kementerian Agama RI](https://mabims.dev/kalender-hijriah/)), with built-in offline support.
 
 [![npm version](https://img.shields.io/npm/v/mabims-hijri.svg)](https://www.npmjs.com/package/mabims-hijri)
 [![license](https://img.shields.io/npm/l/mabims-hijri.svg)](https://github.com/PijarAdiluhung/mabims-hijri/blob/master/LICENSE)
@@ -17,7 +17,7 @@ It wraps the [MABIMS.dev](https://mabims.dev) REST API and bundles a **snapshot 
 
 ### What Is MABIMS.dev?
 
-[MABIMS.dev](https://mabims.dev) is an unofficial, free, open-source API that provides an ecosystem for the **Indonesian Hijri calendar**. It delivers date conversion, monthly and yearly calendars, hilal visibility data, and Islamic event dates — all based on **MABIMS criteria** from **Kementerian Agama Republik Indonesia** (the Indonesian Ministry of Religious Affairs).
+[MABIMS.dev](https://mabims.dev) is an unofficial, free, open-source API that provides an ecosystem for the **Indonesian Hijri calendar**. It delivers date conversion, monthly and yearly calendars, hilal visibility data, and Islamic event dates — all based on **MABIMS criteria** from **Kementerian Agama Republik Indonesia** (the Indonesian Ministry of Religious Affairs). Looking for the full calendar in the browser? See the [kalender Hijriah MABIMS](https://mabims.dev/kalender-hijriah/) page.
 
 Dates within the curated table (2023–2026) come from official publicly available MABIMS data. Dates beyond that use **Neo MABIMS** — an algorithmic computation based on astronomical criteria (moon altitude ≥ 3°, elongation ≥ 6.4° at local sunset, evaluated at coastal observation points across Indonesia).
 
