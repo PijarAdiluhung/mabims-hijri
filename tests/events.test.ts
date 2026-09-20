@@ -67,6 +67,9 @@ describe('events', () => {
     const bidh = result.events.filter(e => e.event === 'ayyamul_bidh');
     expect(bidh).toHaveLength(12);
     expect(bidh[0].date_range!.hijri_end).toBe(`${bidh[0].hijri.slice(0, 7)}-15`);
+    const zulhijjah = bidh.find(e => e.hijri.slice(5, 7) === '12')!;
+    expect(zulhijjah.hijri).toBe('1446-12-14');
+    expect(zulhijjah.date_range!.hijri_end).toBe('1446-12-16');
   });
 
   it('include=all should contain base, extra and ayyamul_bidh (offline)', async () => {

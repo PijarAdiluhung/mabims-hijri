@@ -318,7 +318,7 @@ console.log(tasyrik?.date_range);
 |-------|------|---------|-------------|
 | `year` | `number` | required | Hijri or Gregorian year |
 | `calendar` | `'gregorian' \| 'hijri'` | `'hijri'` | Which calendar the input year is in |
-| `options.include` | `'extra' \| 'ayyamul_bidh' \| 'all' \| slug \| array of them` | — | Optional extras: `extra` adds the tier-2 observances, `ayyamul_bidh` adds the white days (13–15 of every Hijri month, one ranged event per month), `all` adds everything. Base 5 are always included |
+| `options.include` | `'extra' \| 'ayyamul_bidh' \| 'all' \| slug \| array of them` | — | Optional extras: `extra` adds the tier-2 observances, `ayyamul_bidh` adds the white days (13–15 of every Hijri month, 14–16 in Dhul Hijjah since the 13th is a Tashriq day, one ranged event per month), `all` adds everything. Base 5 are always included |
 | `options.forceRefresh` | `boolean` | `false` | Skip the cache |
 
 **Events included (default + extras):**
@@ -336,7 +336,7 @@ console.log(tasyrik?.date_range);
 | `tasua` | Tasu'a fasting | 9 Muharram | `include` |
 | `asyura` | Ashura fasting | 10 Muharram | `include` |
 | `tasyrik` | Days of Tashriq | 11–13 Dhul Hijjah | `include` |
-| `ayyamul_bidh` | White-day fasting | 13–15 of every Hijri month | `include` |
+| `ayyamul_bidh` | White-day fasting | 13–15 of every Hijri month (14–16 in Dhul Hijjah) | `include` |
 
 ---
 

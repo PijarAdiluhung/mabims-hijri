@@ -55,6 +55,15 @@ const EXTRA_DEFINITIONS: EventDef[] = [
 
 const AYYAMUL_BIDH_NAME = 'Puasa Ayyamul Bidh';
 
+/**
+ * Start and end day of Ayyamul Bidh for a Hijri month. The series is 13-15
+ * of every month, except Dzulhijjah: day 13 is the last day of Tasyrik
+ * (fasting is prohibited), so the white days there shift to 14-16.
+ */
+function ayyamulBidhSpan(month: number): { start: number; end: number } {
+  return month === 12 ? { start: 14, end: 16 } : { start: 13, end: 15 };
+}
+
 function normalizeInclude(include: EventsOptions['include']): string[] {
   if (!include) return [];
   const list = Array.isArray(include) ? include : [include];
@@ -103,7 +112,8 @@ function neededHijriDates(year: number, calendar: 'hijri' | 'gregorian', include
     }
     if (wantBidh) {
       for (let month = 1; month <= 12; month++) {
-        dates.push(`${year}-${pad2(month)}-13`, `${year}-${pad2(month)}-15`);
+        const { start, end } = ayyamulBidhSpan(month);
+        dates.push(`${year}-${pad2(month)}-${pad2(start)}`, `${year}-${pad2(month)}-${pad2(end)}`);
       }
     }
     return dates;
@@ -122,7 +132,8 @@ function neededHijriDates(year: number, calendar: 'hijri' | 'gregorian', include
     }
     if (wantBidh) {
       for (let month = 1; month <= 12; month++) {
-        dates.push(`${hy}-${pad2(month)}-13`, `${hy}-${pad2(month)}-15`);
+        const { start, end } = ayyamulBidhSpan(month);
+        dates.push(`${hy}-${pad2(month)}-${pad2(start)}`, `${hy}-${pad2(month)}-${pad2(end)}`);
       }
     }
   }
@@ -174,7 +185,8 @@ function computeBundledEvents(
   };
 
   const pushBidh = (month: number, hy: number) => {
-    const hIso = `${hy}-${pad2(month)}-13`;
+    const { start, end } = ayyamulBidhSpan(month);
+    const hIso = `${hy}-${pad2(month)}-${pad2(start)}`;
     const gIso = h2g[hIso];
     if (!gIso) return;
     if (calendar === 'gregorian' && !gIso.startsWith(`${year}-`)) return;
@@ -184,7 +196,7 @@ function computeBundledEvents(
       hijri: hIso,
       gregorian: gIso,
       source: 'mabims',
-      date_range: dateRange(hIso, gIso, 15),
+      date_range: dateRange(hIso, gIso, end),
     });
   };
 
