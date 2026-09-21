@@ -1,6 +1,6 @@
 {
   "name": "mabims-hijri",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Kalender Hijriah MABIMS — offline-first JS/TS client for the mabims.dev API (Indonesian Hijri calendar)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
