@@ -89,23 +89,23 @@ describe('today', () => {
 
   it('should request next from the API when today is outside bundled range', async () => {
     vi.useFakeTimers();
-    vi.setSystemTime(new Date('2027-06-01T10:00:00Z'));
+    vi.setSystemTime(new Date('2028-06-01T10:00:00Z'));
     vi.mocked(api.fetchToday).mockResolvedValue({
       ...mockResponse,
       next: {
-        date: '1449-01-01',
+        date: '1450-01-01',
         calendar: 'hijri' as const,
         day: 1,
         month: 1,
         month_name: 'Muharram',
-        year: 1449,
+        year: 1450,
         source: 'mabims-computed',
       },
     });
     try {
       const result = await today({ tz: 'Asia/Jakarta', forceRefresh: true, next: true });
       expect(api.fetchToday).toHaveBeenCalledWith('Asia/Jakarta', true);
-      expect(result.next?.date).toBe('1449-01-01');
+      expect(result.next?.date).toBe('1450-01-01');
     } finally {
       vi.useRealTimers();
     }

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { getBundledDate, isBundledDateAvailable, getBundledRange } from '../src/bundled';
+import { getBundledDate, isBundledDateAvailable, getBundledRange, getBundledHijriRange } from '../src/bundled';
 
 describe('bundled', () => {
   describe('getBundledDate', () => {
@@ -34,9 +34,21 @@ describe('bundled', () => {
       expect(result?.day).toBe(18);
     });
 
-    it('should handle end of bundled range', () => {
-      const result = getBundledDate('2026-12-31');
+    it('should handle 2027 dates', () => {
+      const result = getBundledDate('2027-01-09');
       expect(result).not.toBeNull();
+      expect(result?.year).toBe(1448);
+      expect(result?.month).toBe(8);
+      expect(result?.day).toBe(1);
+      expect(result?.month_name).toBe("Sya'ban");
+    });
+
+    it('should handle end of bundled range', () => {
+      const result = getBundledDate('2027-12-31');
+      expect(result).not.toBeNull();
+      expect(result?.year).toBe(1449);
+      expect(result?.month).toBe(8);
+      expect(result?.day).toBe(3);
     });
 
     it('should return correct month names', () => {
@@ -68,7 +80,15 @@ describe('bundled', () => {
     it('should return correct range', () => {
       const range = getBundledRange();
       expect(range.start).toBe('2023-01-23');
-      expect(range.end).toBe('2026-12-31');
+      expect(range.end).toBe('2027-12-31');
+    });
+  });
+
+  describe('getBundledHijriRange', () => {
+    it('should return correct range', () => {
+      const range = getBundledHijriRange();
+      expect(range.start).toBe('1444-07-01');
+      expect(range.end).toBe('1449-08-03');
     });
   });
 });

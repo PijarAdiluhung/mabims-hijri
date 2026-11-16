@@ -112,7 +112,7 @@ export function isBundledDateAvailable(date: string, calendar: 'gregorian' | 'hi
  * import { getBundledRange } from 'mabims-hijri';
  *
  * getBundledRange();
- * // { start: '2024-01-13', end: '2026-12-31' }
+ * // { start: '2023-01-23', end: '2027-12-31' }
  * ```
  */
 export function getBundledRange(): { start: string; end: string } {
@@ -134,7 +134,7 @@ export function getBundledRange(): { start: string; end: string } {
  * import { getBundledHijriRange } from 'mabims-hijri';
  *
  * getBundledHijriRange();
- * // { start: '1445-07-01', end: '1448-12-30' }
+ * // { start: '1444-07-01', end: '1449-08-03' }
  * ```
  */
 export function getBundledHijriRange(): { start: string; end: string } {

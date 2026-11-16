@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2026-11-16
+
+### Changed
+- Expanded bundled MABIMS data coverage from 2023-01-23 to **2027-12-31** (Hijri 1444-07-01 to 1449-08-03). The bundled snapshot now includes the official 2027 month starts from 1448-08 through 1449-08.
+- Bundled data now matches the full MABIMS API curated table through 2027.
+
+### Notes
+- `getBundledRange()` now returns `{ start: '2023-01-23', end: '2027-12-31' }`.
+- `getBundledHijriRange()` now returns `{ start: '1444-07-01', end: '1449-08-03' }`.
+- Dates after 2027-12-31 still fall back to the live API's Neo MABIMS computation.
+
 ## [1.5.0] - 2026-09-21
 
 ### Added
